@@ -17,7 +17,7 @@ const createNoticication = notification =>{
 exports.projectCreated = functions.firestore.document('projects/{projectId}').onCreate(doc=>{
     
     const project = doc.data()
-    console.log(project)
+    
     const notification = {
         content :'Added a new project',
         user: `${project.authorFirstName} ${project.authorLastName}`,
@@ -25,4 +25,17 @@ exports.projectCreated = functions.firestore.document('projects/{projectId}').on
     }
     return createNoticication(notification)
 
+})
+exports.userJoined = functions.auth.user().onCreate(user=>{
+    //user created in auth service
+    //get user profile from collection
+    admin.firestore().collection('users').doc(user.uid).get().then(doc=>{
+        const newuser=doc.data()
+        const notification = {
+            content:'Joined the club',
+            user: `${newuser.firstname} ${newuser.lastname}`,
+            time: admin.firestore.FieldValue.serverTimestamp() 
+        }
+        createNoticication(notification)
+    })
 })
