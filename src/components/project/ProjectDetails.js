@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 const  ProjectDetails=(props)=> {
     const {project}=props
     if(project){
-        console.log(project)
+       
         return(
             <div className="container project-details">
                 <div className="card z-depth-0">
