@@ -1,6 +1,6 @@
 
 
-import {LOGIN_SUCCESS,LOGIN_ERROR,SIGNOUT_SUCCESS} from '../actions/types'
+import {LOGIN_SUCCESS,LOGIN_ERROR,SIGNOUT_SUCCESS,SIGNUP_SUCCESS, SIGNUP_ERROR} from '../actions/types'
 const initialState ={
     authenticated:false,
     authError:null
@@ -25,7 +25,16 @@ export default function(state=initialState,action){
                 ...state,
                 authenticated:false
             }
-
+        case SIGNUP_SUCCESS:
+            return {
+                ...state,
+                authError:null,
+            }
+        case SIGNUP_ERROR:
+            return{
+                ...state,
+                authError:action.payload.message
+            }
         default:
             return state
         }

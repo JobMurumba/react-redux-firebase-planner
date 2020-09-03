@@ -27,5 +27,7 @@ class App extends React.Component {
 
 }
 }
+//allow read, write: if
+//request.time < timestamp.date(2020, 10, 2);
 
 export default App;
